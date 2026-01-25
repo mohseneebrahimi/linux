@@ -18,7 +18,7 @@ curl ifconfig.me
 ping 192.168.0.0 -------------------------------- age in javab nade moshkel ssh nis moshkel networkeee
 sudo apt install openssh-server -y
 # 2 important job in ssh: 1- user/pass Authentication is to be activated, 2- key-gen to create publicKey privatekey-----publicKey for tokhmgozary, privatekey another way
-#?????
+# ?????
 sudo systemctl status ssh-------if ssh is up & running should be  "active(running)"
 sudo ss -tlnp | grep :22-----we want to see if SSH listen to port 22
 nano /etc/ssh/ssh_config---------port 22 comment nabashad
@@ -71,23 +71,25 @@ sudo usermod -aG sudo user3
 
 #Update your system
 sudo apt update
-sudo apt upgrade -y
+#sudo apt upgrade -y
 
 #Install Java (required)
 #Jenkins needs Java. OpenJDK 17 is the current safe default.
-sudo apt install openjdk-17-jdk -y
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+
 
 #Verify:
 java -version
 
 #Add the Jenkins repository & key
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key \
-  | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ \
-  | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
-
+#SSL, 443 certificate,https certification
 #Update again:
 sudo apt update
 
@@ -117,3 +119,7 @@ http://localhost:8080
 #Get the initial admin password:
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 #Paste it into the web UI → install recommended plugins → create admin user 🎉
+
+user: user1
+pass:2237523
+http://192.168.0.161:8080/
