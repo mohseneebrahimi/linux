@@ -1,5 +1,14 @@
 #prepare Jenkins server
-#Bridge Adapter should be selected
+#0- VirtualBox/ new Server/ download ISO file/ cpu:2 mem:2 storage:4G(2.6g min) / R-click/setting/network/Bridged Adapter should be selected-----premitous:all
+# 1- find local IP(192.168.1.1)
+# 2- ping IP(from CMD)
+# 3 install SSH/ start Service---------should be ---active-running
+# 4- mobaXtrem
+# 5- install Java
+# SSL, 443 certificate,https certification-------for download-----------if 443...: just wait
+# 6-add Jenkins Repository/ install Jenkins/ call in browser // add key for jenkins---
+# job1: shell--------just type "hello"
+# 7-install Plagin GIT
 #provide User/pass and hostname
 sudo su -            to change to root
 #private IP
@@ -29,8 +38,36 @@ ssh localhost--------ettesale dakheli
 sudo systemctl enable ssh
 #clone------------------------hame chiz az avval
 
+#change hostname
+cat /etc/hostname
+hostname jenkinsServer
 
+#where is installed GIT
+whereis git
+# /usr/bin/git----------jenkins/tool/git/ ----last part:"git"
 
+# jobGit: just Git-URL-repository-------------Build
+# automatic before all, make PULL.............save in:/var/lib/jenkins/workspace/git1
+cd /var/lib/jenkins/workspace/git1
+cd /var/lib/jenkins/workspace----------------all jobs Workspace
+
+# install Maven
+sudo apt install maven
+mvn --version
+mvn -v
+
+# install Maven, approach2:    maven website/find file.tar.gz, R click/copy address/ 
+wget <address>
+cd /opt/maven/bin
+./mvn -v
+
+# Environment Variable: 
+find / -name openjdk*--------------------/usr/bin/jvm
+vi /root/.bash_profile
+M2=/opt/maven
+M2_HOME=/opt/maven/bin
+JAVA_HOME=/usr/bin/jvm/java-21-openjdk-amd64
+Path:home/bin:     $JAVA_HOME:$M2_HOME:$M2
 
 
 
@@ -85,6 +122,7 @@ java -version
 #Add the Jenkins repository & key
 sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
   https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+  
 echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
@@ -111,6 +149,8 @@ sudo ufw reload
 #Access Jenkins
 Open your browser:
 http://<your-server-ip>:8080
+http://192.168.0.161:8080/
+http://192.168.0.183:8080/
 
 #or if local:
 http://localhost:8080
@@ -123,3 +163,25 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 user: user1
 pass:2237523
 http://192.168.0.161:8080/
+
+
+# job1: shell--------just type "hello"
+# description
+# Build/ shell script/ echo "hello"
+
+
+#GIT
+#install
+sudo apt install git -y
+git --version
+
+# install GIT Plagin on Jenkins
+
+
+
+
+
+
+
+#change Jenkins Language
+#install locale Plagin:    manage/avalable Plagin/locale---install
