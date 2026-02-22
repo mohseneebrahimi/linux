@@ -4,11 +4,11 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # pom.xml zuerst kopieren (für Docker Cache)
-COPY pom.xml ./demo4
+COPY demo4/pom.xml .
 RUN mvn dependency:go-offline
 
 # Rest des Projekts kopieren
-COPY src ./demo4/src
+COPY demo4/src ./src
 
 # Projekt bauen
 RUN mvn clean package -DskipTests
