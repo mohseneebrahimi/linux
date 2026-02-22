@@ -4,10 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '''
-                   cd demo4
-                   mvn clean install
-                '''
+                dir('demo4') {
+                    sh 'mvn install'
+                }
             }
         }
     }
