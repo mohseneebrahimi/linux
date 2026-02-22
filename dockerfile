@@ -3,26 +3,22 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-# pom.xml zuerst kopieren (für Docker Cache)
-COPY demo4/pom.xml .
-RUN mvn dependency:go-offline
+# Projektordner kopieren
+COPY demo4/ ./demo4/
 
-# Rest des Projekts kopieren
-COPY demo4/src ./src
+# Ins Projektverzeichnis wechseln
+WORKDIR /app/demo4
 
-# Projekt bauen
+# Projekt bauen (skip Tests optional)
 RUN mvn clean package -DskipTests
 
-
-
-  
-# ---- Stage 2: Run ----
+# ---- Stage 2: Runtime ----
 FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
 # JAR aus Build-Stage kopieren
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/demo4/target/*.jar app.jar
 
 EXPOSE 8081
 
