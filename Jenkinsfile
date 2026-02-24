@@ -4,7 +4,24 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Hello, World!'
+                sh '''
+                   cd demo4
+                   mvn clean install
+                '''
+            }
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                dir('demo4') {
+                    sh 'mvn clean install'
+                }
             }
         }
     }
