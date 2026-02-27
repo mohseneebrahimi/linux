@@ -23,9 +23,19 @@ pipeline {
 			}
 		}
 
-		stage('Docker run') {
-			steps {
-				sh "docker run -p 8082:8080 ${IMAGE_NAME}:latest"
+		//stage('Docker run') {
+		//	steps {
+		//		sh "docker run -p 8082:8080 ${IMAGE_NAME}:latest"
+		//	}
+		//}
+
+		post {
+			success {
+				echo "Erfolg! Image ${IMAGE_NAME} wurde erstellt."
+			}
+			always {
+				// Optional: Aufräumen des Workspaces
+				cleanWs()
 			}
 		}
 	}
