@@ -22,5 +22,11 @@ pipeline {
 				sh "docker images | grep ${IMAGE_NAME}"
 			}
 		}
+
+		stage('Docker run') {
+			steps {
+				sh "docker run -p 8082:8080 ${IMAGE_NAME}:latest"
+			}
+		}
 	}
 }
