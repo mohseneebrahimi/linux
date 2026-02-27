@@ -23,7 +23,7 @@ pipeline {
 	stage('Push to DockerHub') {
             steps {
                 // Hier ziehen wir die Zugangsdaten sicher aus Jenkins
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', 
                                  passwordVariable: 'DOCKER_PASS', 
                                  usernameVariable: 'DOCKER_USER_ENV')]) {
                     
