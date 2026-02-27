@@ -15,8 +15,9 @@ pipeline {
 				// Falls das Dockerfile in demo4 liegt, nutze : dir('demo4')
 				// sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
 				// sh "docker build -t ${IMAGE_NAME}:latest ."
-				sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ."
-                sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:latest ."
+				
+				//sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ."
+                //sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:latest ."
 			}
 		}
 
@@ -24,20 +25,20 @@ pipeline {
 	stage('Push to DockerHub') {
             steps {
                 // Hier ziehen wir die Zugangsdaten sicher aus Jenkins
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', 
-                                 passwordVariable: 'DOCKER_PASS', 
-                                 usernameVariable: 'DOCKER_USER_ENV')]) {
+              //  withCredentials([usernamePassword(credentialsId: 'dockerhub', 
+                //                 passwordVariable: 'DOCKER_PASS', 
+                  //               usernameVariable: 'DOCKER_USER_ENV')]) {
                     
                     // Login bei DockerHub
-                    sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER_ENV} --password-stdin"
+                  //  sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER_ENV} --password-stdin"
                     
                     // Push der Images
-                    sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}"
-                    sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:latest"
+                    //sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                    //sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:latest"
                     
                     // Logout
-                    sh "docker logout"
-                }
+                    //sh "docker logout"
+                //}
             }
         }
 
