@@ -28,8 +28,8 @@ pipeline {
 		//		sh "docker run -p 8082:8080 ${IMAGE_NAME}:latest"
 		//	}
 		//}
-
-		post {
+	}
+	post {
 			success {
 				echo "Erfolg! Image ${IMAGE_NAME} wurde erstellt."
 			}
@@ -37,6 +37,5 @@ pipeline {
 				// Optional: Aufräumen des Workspaces
 				cleanWs()
 			}
-		}
 	}
 }
