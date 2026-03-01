@@ -18,6 +18,7 @@ pipeline {
 				
 				//sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ."
                 //sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:latest ."
+				sh "echo stage1"
 			}
 		}
 
@@ -39,6 +40,7 @@ pipeline {
                     // Logout
                     //sh "docker logout"
                 //}
+				sh "echo stage2"
             }
         }
 
@@ -46,7 +48,8 @@ pipeline {
 		stage('Docker Test') {
 			steps {
 				// Kurzer Check, ob das Image existiert
-				sh "docker images | grep ${IMAGE_NAME}"
+				//sh "docker images | grep ${IMAGE_NAME}"
+				sh "echo stage3"
 			}
 		}
 
