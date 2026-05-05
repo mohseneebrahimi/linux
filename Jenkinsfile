@@ -16,8 +16,8 @@ pipeline {
 				// sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
 				// sh "docker build -t ${IMAGE_NAME}:latest ."
 				
-				//sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ."
-                //sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:latest ."
+				sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER} ."
+                sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:latest ."
 				sh "echo stage1"
 			}
 		}
