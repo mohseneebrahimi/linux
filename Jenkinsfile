@@ -48,7 +48,7 @@ pipeline {
 		stage('Docker Test') {
 			steps {
 				// Kurzer Check, ob das Image existiert
-				//sh "docker images | grep ${IMAGE_NAME}"
+				sh "docker images | grep ${IMAGE_NAME}"
 				sh "echo stage3"
 			}
 		}
@@ -57,18 +57,18 @@ pipeline {
             steps {
                 script {
                     // Wir nutzen die Umgebungsvariable für kubectl
-                    //sh """
-                     //   export KUBECONFIG=${KUBECONFIG_CRED}
+                    sh """
+                       export KUBECONFIG=${KUBECONFIG_CRED}
                         
                       //  # 1. Platzhalter im YAML ersetzen (Tag einfügen)
-                     //   sed -i 's|image:.*|image: ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}|g' deployment.yaml
+                        sed -i 's|image:.*|image: ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}|g' deployment.yaml
                         
                        // # 2. Deployment anwenden
-                      //  kubectl apply -f deployment.yaml --validate=false
+                        kubectl apply -f deployment.yaml --validate=false
                         
                        // # 3. Status prüfen
-                       // kubectl rollout status deployment/demo4-deployment
-                   // """
+                        kubectl rollout status deployment/demo4-deployment
+                    """
 				   sh "echo stage4"
                 }
             }
